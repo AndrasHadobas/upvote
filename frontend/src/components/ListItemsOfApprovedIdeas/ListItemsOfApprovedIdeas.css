@@ -1,0 +1,11 @@
+.tdText {
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+textarea {
+    width: 400px;
+    height: 200px;
+}

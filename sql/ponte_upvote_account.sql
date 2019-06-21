@@ -1,0 +1,4 @@
+INSERT INTO ponte_upvote.account (id, email, first_name, last_name, password, role, user_name) VALUES (1, 'admin@admin.hu', 'Admin', 'Admin', '$2a$10$LhSYGPiDKhKZ/I3VsdhKbeNRiRDvizNtroN6OI2fNV1r3FP9S0ore', 'ROLE_ADMIN', 'admin');
+INSERT INTO ponte_upvote.account (id, email, first_name, last_name, password, role, user_name) VALUES (2, 'andras.hadobas@gmail.com', 'Andras', 'Hadobas', '$2a$10$IWLk6Fj1pfUgdeMfJUXKheykovCf.CYaFWbHNgMLnKda5ls3elEPO', 'ROLE_USER', 'andras.hadobas');
+INSERT INTO ponte_upvote.account (id, email, first_name, last_name, password, role, user_name) VALUES (3, 'bela.magyar@gmail.com', 'Bela', 'Magyar', '$2a$10$N9aZ4Xr9vM2H9FoDlFQHau30EkpzWsaVDlKzbCgIwAl01Ex9lrIcG', 'ROLE_USER', 'bela.magyar');
+INSERT INTO ponte_upvote.account (id, email, first_name, last_name, password, role, user_name) VALUES (4, 'peter.kis@gmail.com', 'Peter', 'Kis', '$2a$10$SqThv8oseVQoAw84eUHTe.ZWBSkd0tTqQt5WlIG7AhGqcZBXvVWzi', 'ROLE_USER', 'peter.kis');

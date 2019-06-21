@@ -1,0 +1,16 @@
+.errorPage_title {
+    color: red;
+    font-size: 40px;
+}
+
+.errorPage_number {
+    color: red;
+    font-size: 120px;
+}
+
+.errorPage_text {
+    color: red;
+    font-size: 25px;
+}
+
+
