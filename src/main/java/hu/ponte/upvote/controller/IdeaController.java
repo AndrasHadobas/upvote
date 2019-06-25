@@ -1,8 +1,10 @@
 package hu.ponte.upvote.controller;
 
+import hu.ponte.upvote.domain.Account;
 import hu.ponte.upvote.dto.IdeaCreationCommand;
 import hu.ponte.upvote.dto.IdeaListItem;
 import hu.ponte.upvote.dto.IdeaListItemForAdmin;
+import hu.ponte.upvote.service.AccountService;
 import hu.ponte.upvote.service.IdeaService;
 import hu.ponte.upvote.validator.IdeaCreationCommandValidator;
 import org.slf4j.Logger;
@@ -27,11 +29,14 @@ public class IdeaController {
 
     private IdeaService ideaService;
 
+    private AccountService accountService;
+
     private IdeaCreationCommandValidator ideaCreationCommandValidator;
 
     @Autowired
-    public IdeaController(IdeaService ideaService, IdeaCreationCommandValidator ideaCreationCommandValidator) {
+    public IdeaController(IdeaService ideaService, AccountService accountService, IdeaCreationCommandValidator ideaCreationCommandValidator) {
         this.ideaService = ideaService;
+        this.accountService = accountService;
         this.ideaCreationCommandValidator = ideaCreationCommandValidator;
     }
 
@@ -51,6 +56,22 @@ public class IdeaController {
     public ResponseEntity<List<IdeaListItem>> getAllApprovedIdeas(Principal principal) {
         List<IdeaListItem> ideaListItems = ideaService.getAllApprovedIdeas();
         logger.info("user:{}: All Approved Ideas have been listed for USER!", principal.getName());
+        return new ResponseEntity<>(ideaListItems, HttpStatus.OK);
+    }
+
+    @GetMapping("allApprovedIdeasByAccount")
+    public ResponseEntity<List<IdeaListItem>> getAllApprovedIdeasByAccount(Principal principal) {
+        Account myAccount = accountService.findByUserName(principal.getName());
+        List<IdeaListItem> ideaListItems = ideaService.getAllApprovedIdeasByAccount(myAccount);
+        logger.info("user:{}: AllApprovedIdeasByAccount have been listed for USER!", principal.getName());
+        return new ResponseEntity<>(ideaListItems, HttpStatus.OK);
+    }
+
+    @GetMapping("/allApprovedIdeasExceptAccount")
+    public ResponseEntity<List<IdeaListItem>> getAllApprovedIdeasExceptAccount(Principal principal) {
+        Account myAccount = accountService.findByUserName(principal.getName());
+        List<IdeaListItem> ideaListItems = ideaService.getAllApprovedIdeasExceptAccount(myAccount);
+        logger.info("user:{}: AllApprovedIdeasExceptAccount have been listed for USER!", principal.getName());
         return new ResponseEntity<>(ideaListItems, HttpStatus.OK);
     }
 

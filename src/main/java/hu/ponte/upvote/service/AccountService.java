@@ -31,4 +31,8 @@ public class AccountService {
 
         return accountRepository.save(account);
     }
+
+    public Account findByUserName(String userName){
+        return accountRepository.findByUserName(userName);
+    }
 }

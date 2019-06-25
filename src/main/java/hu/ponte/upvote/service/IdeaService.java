@@ -55,6 +55,18 @@ public class IdeaService {
         return getIdeaListItems(ideas);
     }
 
+    //for account:USER
+    public List<IdeaListItem> getAllApprovedIdeasByAccount(Account myAccount) {
+        List<Idea> ideas = ideaRepository.getAllApprovedIdeasByAccount(myAccount);
+        return getIdeaListItems(ideas);
+    }
+
+    //for account:USER
+    public List<IdeaListItem> getAllApprovedIdeasExceptAccount(Account myAccount) {
+        List<Idea> ideas = ideaRepository.getAllApprovedIdeasExceptAccount(myAccount);
+        return getIdeaListItems(ideas);
+    }
+
     private List<IdeaListItem> getIdeaListItems(List<Idea> ideas) {
         List<IdeaListItem> ideaListItems = new ArrayList<>();
         for (Idea idea : ideas) {
