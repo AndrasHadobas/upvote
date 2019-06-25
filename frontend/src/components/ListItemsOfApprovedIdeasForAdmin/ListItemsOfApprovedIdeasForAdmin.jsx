@@ -1,6 +1,6 @@
 import React from 'react';
 import Popup from "reactjs-popup";
-import '../ListItemsOfApprovedIdeas/ListItemsOfApprovedIdeas.css'
+import '../ListItemsOfApprovedIdeasExceptTheUser/ListItemsOfApprovedIdeasExceptTheUser.css'
 
 function ListItemsOfApprovedIdeasForAdmin(props) {
 

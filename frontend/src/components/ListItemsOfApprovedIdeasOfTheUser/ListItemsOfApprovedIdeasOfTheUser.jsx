@@ -1,24 +1,12 @@
 import React from 'react';
-import Popup from "reactjs-popup";
 import '../ListItemsOfApprovedIdeasExceptTheUser/ListItemsOfApprovedIdeasExceptTheUser.css'
+import Popup from "reactjs-popup";
 
-function ListItemsOfUnApprovedIdeasForAdmin(props) {
+function ListItemsOfApprovedIdeasOfTheUser(props) {
 
-    let approveButtonItem = null;
-    let deleteButtonItem = null;
     let popUpItem = null;
 
-    if (localStorage.user && JSON.parse(window.localStorage.getItem("user")).role === "ROLE_ADMIN") {
-
-        approveButtonItem =
-            <button type="button" className="btn btn-success" onClick={() => props.approveHandler(props.idea.id)}>
-                Approve
-            </button>;
-
-        deleteButtonItem =
-            <button type="button" className="btn btn-danger" onClick={() => props.deleteHandler(props.idea.id)}>
-                Reject
-            </button>;
+    if (localStorage.user && JSON.parse(window.localStorage.getItem("user")).role === "ROLE_USER") {
 
         popUpItem =
             <Popup
@@ -40,11 +28,8 @@ function ListItemsOfUnApprovedIdeasForAdmin(props) {
             <td className="tdText">{props.idea.name}</td>
             <td className="tdText">{props.idea.description}</td>
             <td>{popUpItem}</td>
-            <td>{props.idea.vote}</td>
-            <td>{approveButtonItem}</td>
-            <td>{deleteButtonItem}</td>
         </tr>
     );
 }
 
-export default ListItemsOfUnApprovedIdeasForAdmin;
+export default ListItemsOfApprovedIdeasOfTheUser;

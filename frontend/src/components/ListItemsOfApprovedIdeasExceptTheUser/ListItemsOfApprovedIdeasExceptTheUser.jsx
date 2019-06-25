@@ -1,8 +1,8 @@
 import React from 'react';
-import './ListItemsOfApprovedIdeas.css'
+import './ListItemsOfApprovedIdeasExceptTheUser.css'
 import Popup from "reactjs-popup";
 
-function ListItemsOfApprovedIdeas(props) {
+function ListItemsOfApprovedIdeasExceptTheUser(props) {
 
     let voteButtonItem = null;
     let popUpItem = null;
@@ -42,4 +42,4 @@ function ListItemsOfApprovedIdeas(props) {
     );
 }
 
-export default ListItemsOfApprovedIdeas;
+export default ListItemsOfApprovedIdeasExceptTheUser;
