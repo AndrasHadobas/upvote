@@ -34,7 +34,23 @@ public class JPAUserDetailsService implements UserDetailsService {
         }
 
         List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(account.getRole().toString());
+        /*
+        the previous line does the following, check the source of AuthorityUtils for details
 
-        return User.withUsername(userName).authorities(authorities).password(account.getPassword()).build();
+        Set<GrantedAuthority> authorities = new HashSet<>();
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(orc.getRole().toString());
+        authorities.add(authority);
+        */
+
+        UserDetails principal = User.withUsername(userName).authorities(authorities).password(account.getPassword()).build();
+        /*
+        the previous line is a shorthand for this (it converts our domain user, which is of type Orc to
+        Spring security's user which is of type UserDetails)
+
+        org.springframework.security.core.userdetails.User principal =
+                new org.springframework.security.core.userdetails.User(orcName, orc.getPassword(), authorities);
+         */
+
+        return principal;
     }
 }
