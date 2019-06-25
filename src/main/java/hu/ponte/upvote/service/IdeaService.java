@@ -79,6 +79,7 @@ public class IdeaService {
     public void addVote(Long id, HttpSession session, Principal principal) {
 
         //account can vote once in a session
+        //account cannot vote on own idea
         //account can vote on only approved idea
 
         if (session.getAttribute("votingAbility") == null) {
@@ -89,15 +90,20 @@ public class IdeaService {
 
                 Idea foundIdea = optionalIdea.get();
 
-                if (foundIdea.getStatus() == Status.STATUS_APPROVED) {
-                    Long votes = foundIdea.getVote();
-                    Long updatedVote = votes + 1L;
-                    foundIdea.setVote(updatedVote);
-                    ideaRepository.save(foundIdea);
-                    session.setAttribute("votingAbility", false);
-                    logger.info("user:{}: successfully added 1 vote for {}.id Idea!", principal.getName(), id);
+                if (!isThisTheAccountSIdea(principal, foundIdea)) {
+
+                    if (foundIdea.getStatus() == Status.STATUS_APPROVED) {
+                        Long votes = foundIdea.getVote();
+                        Long updatedVote = votes + 1L;
+                        foundIdea.setVote(updatedVote);
+                        ideaRepository.save(foundIdea);
+                        session.setAttribute("votingAbility", false);
+                        logger.info("user:{}: successfully added 1 vote for {}.id Idea!", principal.getName(), id);
+                    } else {
+                        logger.info("user:{}: tried to vote for UnApproved idea, it's a CHEAT!", principal.getName());
+                    }
                 } else {
-                    logger.info("user:{}: tried to vote for UnApproved idea, it's a CHEAT!", principal.getName());
+                    logger.info("user:{}: tried to vote for own idea, it's a CHEAT!", principal.getName());
                 }
             } else {
                 throw new EntityNotFoundException("Vote error, there is no idea with the given id: " + id);
@@ -105,6 +111,20 @@ public class IdeaService {
         } else {
             logger.info("user:{}: has already voted!", principal.getName());
         }
+    }
+
+    //account cannot vote on own idea
+    private boolean isThisTheAccountSIdea(Principal principal, Idea idea) {
+        Account account = accountRepository.findByUserName(principal.getName());
+        List<Idea> ideaList = ideaRepository.getAllApprovedIdeasByAccount(account);
+
+        for (Idea checkIdea : ideaList) {
+            if (checkIdea.getId().equals(idea.getId())) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     //for account:ADMIN
