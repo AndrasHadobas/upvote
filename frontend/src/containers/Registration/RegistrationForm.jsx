@@ -55,6 +55,29 @@ class RegistrationForm extends Component {
 
         updatedRegistrationForm[target.name] = updatedFormElement;
         this.setState({registrationForm: updatedRegistrationForm});
+
+
+        // USE THIS CODE IF YOU HAVE CHECKBOX
+
+        // const target = event.target;
+        // const updatedForm = {...this.state.registrationForm};
+        // const updatedFormElement = {...updatedForm[target.name]};
+        //
+        // let value;
+        // if (target.type === 'checkbox') {
+        //     value = target.checked
+        //         ? updatedFormElement.value.concat(target.value)
+        //         : updatedFormElement.value.filter(val => val !== target.value);
+        // } else {
+        //     value = target.value;
+        // }
+        //
+        // updatedFormElement.value = value;
+        // updatedFormElement.isValid = true;
+        // updatedFormElement.message = '';
+        // updatedForm[target.name] = updatedFormElement;
+        //
+        // this.setState({registrationForm: updatedForm});
     };
 
 
@@ -70,6 +93,25 @@ class RegistrationForm extends Component {
         }
 
         this.setState({registrationForm: updatedRegistrationForm});
+
+
+        // const updatedForm = {...this.state.registrationForm};
+        //
+        // for (let field in this.state.registrationForm) {
+        //     const updatedFormElement = {...updatedForm[field]};
+        //     updatedFormElement.isValid = true;
+        //     updatedFormElement.message = '';
+        //     updatedForm[field] = updatedFormElement;
+        // }
+        //
+        // for (let fieldError of error.fieldErrors) {
+        //     const updatedFormElement = {...updatedForm[fieldError.field]};
+        //     updatedFormElement.isValid = false;
+        //     updatedFormElement.message = fieldError.message;
+        //     updatedForm[fieldError.field] = updatedFormElement;
+        // }
+        //
+        // this.setState({registrationForm: updatedForm});
     };
 
 
