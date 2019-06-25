@@ -18,7 +18,8 @@ class InfoPage extends Component {
                     <p>First you have to register and after you can log in.</p>
                     <p>## RULES ##</p>
                     <p>#1  Don't forget, you can only vote once.</p>
-                    <p>#2  If you share a new idea, you have to wait until the admin approves it.</p>
+                    <p>#2  You cannot vote on your own idea!</p>
+                    <p>#3  If you share a new idea, you have to wait until the admin approves it.</p>
                 </div>
             </div>
         )
